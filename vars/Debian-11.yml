@@ -1,0 +1,6 @@
+---
+__rsync_bin_path: "/usr/bin/rsync"
+__rsync_config_path: "/etc/rsync"
+__rsync_packages:
+  - rsync
+

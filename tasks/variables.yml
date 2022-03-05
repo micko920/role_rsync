@@ -1,0 +1,24 @@
+---
+# Variable configuration.
+- name: Check os and version
+  debug:
+    msg: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('-')[0].split('.')[0] }}"
+
+- name: Include OS-specific variables (Debian).
+  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('-')[0].split('.')[0] }}.yml"
+  when: ansible_os_family == 'Debian'
+
+- name: Define rsync_packages.
+  set_fact:
+    rsync_packages: "{{ __rsync_packages | list }}"
+  when: rsync_packages is not defined
+
+- name: Define rsync_bin_path.
+  set_fact:
+    rsync_bin_path: "{{ __rsync_bin_path }}"
+  when: rsync_bin_path is not defined
+
+- name: Define rsync_config_path.
+  set_fact:
+    rsync_config_path: "{{ __rsync_config_path }}"
+  when: rsync_config_path is not defined

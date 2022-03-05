@@ -1,0 +1,10 @@
+---
+# Edition can be one of: 'ce' (Community Edition) or 'ee' (Enterprise Edition).
+rsync_edition: 'ce'
+rsync_package_state: present
+
+# Service options.
+rsync_service_state: stopped
+rsync_service_enabled: false
+rsync_restart_handler_state: restarted
+

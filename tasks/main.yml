@@ -1,0 +1,21 @@
+---
+- include_tasks: is_systemd.yml
+
+# Variable configuration.
+- include_tasks: variables.yml
+
+- name: Install rsync.
+  apt:
+    name: "{{ rsync_packages }}"
+    state: present
+
+- name: Ensure rsync is started and enabled at boot.
+  systemd:
+    name: rsync
+    state: "{{ rsync_service_state }}"
+    enabled: "{{ rsync_service_enabled }}"
+  when: systemd_pid_1 is defined and systemd_pid_1
+
+- name: Ensure handlers are notified now to avoid firewall conflicts.
+  meta: flush_handlers
+
